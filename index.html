@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NursAssess Pro — Sistem Asesmen Keperawatan SDKI</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- === GRID OVERLAY === -->
+  <div class="grid-overlay"></div>
+  <div class="scanline"></div>
+  <div id="particles"></div>
+
+  <!-- === TOAST === -->
+  <div id="toast-box"></div>
+
+  <!-- === MOBILE TOGGLE === -->
+  <button id="mtog" onclick="toggleSB()" aria-label="Menu"><i class="fas fa-bars"></i></button>
+  <div id="ovl" onclick="toggleSB()"></div>
+
+  <!-- === SIDEBAR === -->
+  <aside id="sidebar">
+    <div class="sb-logo">
+      <div class="sb-logo-icon"><i class="fas fa-heart-pulse"></i></div>
+      <div class="sb-logo-text">
+        <span class="sb-logo-name">NursAssess</span>
+        <span class="sb-logo-ver">PRO v2.0</span>
+      </div>
+    </div>
+    <nav id="navl"></nav>
+    <div class="sb-footer">
+      <span class="sb-footer-label">Developed by</span>
+      <span class="sb-footer-name">Iman Waluyo</span>
+    </div>
+  </aside>
+
+  <!-- === MAIN === -->
+  <div id="main">
+    <header class="topbar">
+      <div id="stitle" class="topbar-title"></div>
+      <div class="topbar-track"><div class="topbar-fill" id="pfill"></div></div>
+      <span id="ptext" class="topbar-pct">0%</span>
+      <button class="btn btn-icon no-print" onclick="printRes()" title="Cetak"><i class="fas fa-print"></i></button>
+    </header>
+    <main class="content" id="carea">
+      <!-- Diisi oleh JS -->
+    </main>
+  </div>
+
+  <div class="dev-tag no-print">by Iman Waluyo</div>
+  <script src="script.js"></script>
+</body>
+</html>
