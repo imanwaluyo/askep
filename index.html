@@ -6,24 +6,18 @@
   <title>NursAssess Pro — Sistem Asesmen Keperawatan SDKI</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 
-  <!-- === GRID OVERLAY === -->
-  <div class="grid-overlay"></div>
-  <div class="scanline"></div>
-  <div id="particles"></div>
-
-  <!-- === TOAST === -->
+  <div id="bg-shapes"></div>
   <div id="toast-box"></div>
 
-  <!-- === MOBILE TOGGLE === -->
   <button id="mtog" onclick="toggleSB()" aria-label="Menu"><i class="fas fa-bars"></i></button>
   <div id="ovl" onclick="toggleSB()"></div>
 
-  <!-- === SIDEBAR === -->
   <aside id="sidebar">
     <div class="sb-logo">
       <div class="sb-logo-icon"><i class="fas fa-heart-pulse"></i></div>
@@ -39,18 +33,46 @@
     </div>
   </aside>
 
-  <!-- === MAIN === -->
   <div id="main">
     <header class="topbar">
       <div id="stitle" class="topbar-title"></div>
       <div class="topbar-track"><div class="topbar-fill" id="pfill"></div></div>
       <span id="ptext" class="topbar-pct">0%</span>
       <button class="btn btn-icon no-print" onclick="printRes()" title="Cetak"><i class="fas fa-print"></i></button>
+      <button class="btn btn-icon no-print" onclick="clearAllData()" title="Hapus Semua Data" style="color:var(--danger)"><i class="fas fa-trash-can"></i></button>
     </header>
-    <main class="content" id="carea">
-      <!-- Diisi oleh JS -->
-    </main>
+    <main class="content" id="carea"></main>
   </div>
+
+  <!-- Modal Konfirmasi Clear -->
+  <div id="clear-modal" class="modal-overlay no-print" style="display:none">
+    <div class="modal-box">
+      <div class="modal-icon"><i class="fas fa-triangle-exclamation"></i></div>
+      <h3 style="font-size:17px;font-weight:700;margin-bottom:6px">Hapus Semua Data?</h3>
+      <p style="font-size:13px;color:var(--text2);margin-bottom:20px">Semua data yang telah diisi pada form asesmen akan dihapus dan tidak dapat dikembalikan.</p>
+      <div style="display:flex;gap:10px;justify-content:flex-end">
+        <button class="btn btn-s" onclick="closeClearModal()">Batal</button>
+        <button class="btn btn-danger" onclick="confirmClear()"><i class="fas fa-trash-can"></i> Ya, Hapus</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Export -->
+  <div id="export-modal" class="modal-overlay no-print" style="display:none">
+    <div class="modal-box">
+      <div class="modal-icon" style="background:var(--accent-light);color:var(--accent)"><i class="fas fa-file-export"></i></div>
+      <h3 style="font-size:17px;font-weight:700;margin-bottom:6px">Export Hasil Asesmen</h3>
+      <p style="font-size:13px;color:var(--text2);margin-bottom:20px">Pilih format file untuk mengekspor seluruh hasil asesmen keperawatan termasuk diagnosis SDKI, SLKI, SIKI, dan prioritas masalah.</p>
+      <div style="display:flex;gap:10px;justify-content:flex-end">
+        <button class="btn btn-s" onclick="closeExportModal()">Batal</button>
+        <button class="btn btn-p" onclick="exportPDF()"><i class="fas fa-file-pdf"></i> Export PDF</button>
+        <button class="btn" style="background:var(--sky);color:#fff" onclick="exportDOC()"><i class="fas fa-file-word"></i> Export DOC</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden export container -->
+  <div id="export-content" style="position:absolute;left:-9999px;top:0;width:210mm"></div>
 
   <div class="dev-tag no-print">by Iman Waluyo</div>
   <script src="script.js"></script>
